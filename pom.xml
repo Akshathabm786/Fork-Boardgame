@@ -1,11 +1,12 @@
+```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
-         https://maven.apache.org/xsd/maven-4.0.0.xsd">
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 
     <modelVersion>4.0.0</modelVersion>
 
+    <!-- Spring Boot Parent -->
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
@@ -13,6 +14,7 @@
         <relativePath/>
     </parent>
 
+    <!-- Project Details -->
     <groupId>com.javaproject</groupId>
     <artifactId>database_service_project</artifactId>
     <version>0.0.5-SNAPSHOT</version>
@@ -20,6 +22,7 @@
     <description>Project for Spring Boot</description>
     <packaging>jar</packaging>
 
+    <!-- Properties -->
     <properties>
         <java.version>11</java.version>
         <jacoco.version>0.8.13</jacoco.version>
@@ -28,6 +31,7 @@
         </sonar.coverage.jacoco.xmlReportPaths>
     </properties>
 
+    <!-- Dependencies -->
     <dependencies>
 
         <dependency>
@@ -86,6 +90,7 @@
 
     </dependencies>
 
+    <!-- Build Plugins -->
     <build>
         <plugins>
 
@@ -103,7 +108,7 @@
                 </configuration>
             </plugin>
 
-            <!-- JaCoCo Code Coverage Plugin -->
+            <!-- JaCoCo Maven Plugin -->
             <plugin>
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
@@ -111,3 +116,48 @@
 
                 <executions>
 
+                    <execution>
+                        <id>jacoco-initialize</id>
+                        <goals>
+                            <goal>prepare-agent</goal>
+                        </goals>
+                    </execution>
+
+                    <execution>
+                        <id>jacoco-report</id>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>report</goal>
+                        </goals>
+                    </execution>
+
+                </executions>
+            </plugin>
+
+            <!-- SonarQube Maven Plugin -->
+            <plugin>
+                <groupId>org.sonarsource.scanner.maven</groupId>
+                <artifactId>sonar-maven-plugin</artifactId>
+                <version>4.0.0.4121</version>
+            </plugin>
+
+        </plugins>
+    </build>
+
+    <!-- Nexus Repository Configuration -->
+    <distributionManagement>
+
+        <repository>
+            <id>maven-releases</id>
+            <url>http://16.112.147.215:8081/repository/maven-releases/</url>
+        </repository>
+
+        <snapshotRepository>
+            <id>maven-snapshots</id>
+            <url>http://16.112.147.215:8081/repository/maven-snapshots/</url>
+        </snapshotRepository>
+
+    </distributionManagement>
+
+</project>
+```
